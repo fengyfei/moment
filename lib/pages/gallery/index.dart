@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Gallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Home Page View',
+            'Gallery Page View',
           ),
         ],
       ),
