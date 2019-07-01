@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:moment/global.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> images = [
-      'https://images.pexels.com/photos/35857/amazing-beautiful-breathtaking-clouds.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-      'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
-      'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+      'http://pickupimage.com/data/photo/2013/10/13/Iceland-Landscape-spring-panorama-at-sunset-1013137EEFB8CCC6.jpg',
+      'http://pickupimage.com/data/photo/2015/1/30/013015C-2590-D31A-4093EB1B6DB0D7EC.jpg',
+      'http://pickupimage.com/data/photo/2015/4/4/0404159-2590-D31A-4090F0E6014AE3F9.jpg'
     ];
 
     return Container(
@@ -16,12 +17,12 @@ class Home extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: <Widget>[
+            More(text: 'Discovery', onTap: () {}),
             Container(
-              margin: EdgeInsets.all(8.0),
               height: 240,
               child: Swiper(
                 viewportFraction: 0.8,
-                scale: 0.9,
+                scale: 0.85,
                 autoplay: true,
                 autoplayDelay: 4000,
                 itemBuilder: (BuildContext context,int index){
@@ -39,8 +40,50 @@ class Home extends StatelessWidget {
                 itemCount: images.length,
               ),
             ),
+            More(text: 'Moments', onTap: () {}),
+            _buildContent(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildContent() {
+    return Container(
+      margin: EdgeInsets.only(left: 4.0, bottom: 10.0, right: 4.0),
+      child: ListView.builder(
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            width: MediaQuery.of(context).size.width - 100,
+            child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    child: FadeInImage(
+                      image: NetworkImage('https://cdn.nlark.com/yuque/0/2019/jpeg/124360/1561544455524-assets/web-upload/cce79318-aaca-48d9-8374-4cb660733c8f.jpeg'),
+                      fit: BoxFit.fitWidth,
+                      placeholder: AssetImage('assets/images/loading.gif'),
+                    ),
+                  ),
+                  const ListTile(
+                    leading: Icon(Icons.album),
+                    title: Text('Title'),
+                    subtitle: Text('Subtitle'),
+                    trailing: Text('Trailing'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+        itemCount: 4,
       ),
     );
   }
